@@ -30,16 +30,6 @@ _ide_helper_models.php
 .devbox
 devbox.lock
 
-###> friendsofphp/php-cs-fixer ###
-/.php-cs-fixer.php
 /.php-cs-fixer.cache
-###< friendsofphp/php-cs-fixer ###
 
-###> phpunit/phpunit ###
-/phpunit.xml
 /.phpunit.cache/
-###< phpunit/phpunit ###
-
-###> phpstan/phpstan ###
-phpstan.neon
-###< phpstan/phpstan ###

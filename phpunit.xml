@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         bootstrap="tests/bootstrap.php"
+         colors="true"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/11.5/phpunit.xsd"
+         cacheResult="false">
+  <source>
+    <include>
+      <directory>./src</directory>
+    </include>
+    <exclude>
+      <directory>./src/Kernel.php</directory>
+    </exclude>
+  </source>
+  <testsuites>
+    <testsuite name="Project Test Suite">
+      <directory>./tests</directory>
+    </testsuite>
+  </testsuites>
+  <php>
+    <ini name="error_reporting" value="E_ALL"/>
+    <ini name="memory_limit" value="1024M"/>
+    <env name="APP_ENV" value="test"/>
+    <env name="KERNEL_CLASS" value="App\Kernel"/>
+    <server name="SHELL_VERBOSITY" value="-1"/>
+  </php>
+</phpunit>
