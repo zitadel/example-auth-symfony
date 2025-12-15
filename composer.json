@@ -42,7 +42,7 @@
     "icanhazstring/composer-unused": "^0.9.3",
     "phpstan/phpstan": "^1.12",
     "phpstan/phpstan-symfony": "^1.4",
-    "phpunit/phpunit": "^11.0",
+    "phpunit/phpunit": "^12.5",
     "rector/rector": "^1.2",
     "symfony/browser-kit": "7.4.*"
   },
