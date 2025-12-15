@@ -7,12 +7,14 @@ namespace App\Controller;
 use App\Service\AuthService;
 use App\Service\MessageService;
 use App\Security\User;
+use Random\RandomException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
@@ -83,6 +85,7 @@ final class AuthController extends AbstractController
      * @param Request $request The current request
      * @param string $provider The OAuth provider name (currently only 'zitadel')
      * @return RedirectResponse Redirect to ZITADEL authorization endpoint
+     * @throws RandomException
      */
     #[Route('/auth/signin/{provider}', name: 'auth_signin_provider', methods: ['POST'])]
     public function redirectToProvider(Request $request, string $provider): RedirectResponse
@@ -103,7 +106,7 @@ final class AuthController extends AbstractController
 
         $params = http_build_query([
             'client_id' => $this->clientId,
-            'redirect_uri' => $this->router->generate('auth_callback', [], RouterInterface::ABSOLUTE_URL),
+            'redirect_uri' => $this->router->generate('auth_callback', [], UrlGeneratorInterface::ABSOLUTE_URL),
             'response_type' => 'code',
             'scope' => 'openid profile email offline_access urn:zitadel:iam:user:metadata urn:zitadel:iam:user:resourceowner urn:zitadel:iam:org:projects:roles',
             'state' => $state,
@@ -168,6 +171,7 @@ final class AuthController extends AbstractController
      *
      * @param Request $request The current request
      * @return Response Redirect to ZITADEL logout URL or error response
+     * @throws RandomException
      */
     #[Route('/auth/logout', name: 'auth_logout', methods: ['POST'])]
     public function logout(Request $request): Response
@@ -184,10 +188,10 @@ final class AuthController extends AbstractController
         $response->headers->setCookie(
             Cookie::create('logout_state')
                 ->withValue($logoutData['state'])
-                ->withExpires(0)
+                ->withExpires()
                 ->withPath('/auth/logout/callback')
                 ->withSecure($request->isSecure())
-                ->withHttpOnly(true)
+                ->withHttpOnly()
                 ->withSameSite('lax')
         );
 

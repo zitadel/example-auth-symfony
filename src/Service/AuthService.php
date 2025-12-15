@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace App\Service;
 
 use App\Security\User;
+use Random\RandomException;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
+use Throwable;
 
 /**
  * Handles OAuth token refresh and ZITADEL logout URL generation.
@@ -82,7 +84,7 @@ final readonly class AuthService
                 refreshToken: $data['refresh_token'] ?? $refreshToken,
                 expiresAt: time() + ($data['expires_in'] ?? 3600),
             );
-        } catch (\Throwable) {
+        } catch (Throwable) {
             return null;
         }
     }
@@ -103,6 +105,7 @@ final readonly class AuthService
      *
      * @param string $idToken The user's ID token from their current session
      * @return array{url: string, state: string} Logout URL and state value for validation
+     * @throws RandomException
      */
     public function buildLogoutUrl(string $idToken): array
     {

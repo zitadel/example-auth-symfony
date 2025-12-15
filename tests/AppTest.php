@@ -10,27 +10,27 @@ final class AppTest extends WebTestCase
 {
     public function testAppStarts(): void
     {
-        $client = static::createClient();
+        $client = AppTest::createClient();
         $this->assertNotNull($client);
     }
 
     public function testHomePageLoads(): void
     {
-        $client = static::createClient();
+        $client = AppTest::createClient();
         $client->request('GET', '/');
         $this->assertResponseIsSuccessful();
     }
 
     public function testSigninPageLoads(): void
     {
-        $client = static::createClient();
+        $client = AppTest::createClient();
         $client->request('GET', '/auth/signin');
         $this->assertResponseIsSuccessful();
     }
 
     public function testProfileRedirectsWhenUnauthenticated(): void
     {
-        $client = static::createClient();
+        $client = AppTest::createClient();
         $client->request('GET', '/profile');
         $this->assertResponseRedirects();
     }

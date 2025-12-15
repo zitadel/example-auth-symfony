@@ -11,6 +11,7 @@ use Override;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
@@ -19,6 +20,11 @@ use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
 use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
 use Symfony\Component\Security\Http\Authenticator\Passport\SelfValidatingPassport;
 use Symfony\Component\Security\Http\EntryPoint\AuthenticationEntryPointInterface;
+use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\DecodingExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 /**
@@ -77,7 +83,11 @@ final class ZitadelAuthenticator extends AbstractAuthenticator implements Authen
      *
      * @param Request $request The callback request from ZITADEL containing the authorization code
      * @return Passport Security passport containing authenticated user credentials
-     * @throws AuthenticationException If code exchange or userinfo fetch fails
+     * @throws ClientExceptionInterface
+     * @throws DecodingExceptionInterface
+     * @throws RedirectionExceptionInterface
+     * @throws ServerExceptionInterface
+     * @throws TransportExceptionInterface
      */
     #[Override]
     public function authenticate(Request $request): Passport
@@ -94,7 +104,7 @@ final class ZitadelAuthenticator extends AbstractAuthenticator implements Authen
             'body' => [
                 'grant_type' => 'authorization_code',
                 'code' => $code,
-                'redirect_uri' => $this->router->generate('auth_callback', [], RouterInterface::ABSOLUTE_URL),
+                'redirect_uri' => $this->router->generate('auth_callback', [], UrlGeneratorInterface::ABSOLUTE_URL),
                 'client_id' => $this->clientId,
                 'client_secret' => $this->clientSecret,
                 'code_verifier' => $codeVerifier,

@@ -1,9 +1,10 @@
-<?php
+<?php /** @noinspection PhpMultipleClassDeclarationsInspection */
 
 declare(strict_types=1);
 
 namespace App\Security;
 
+use Override;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
@@ -40,7 +41,7 @@ final readonly class User implements UserInterface
     ) {
     }
 
-    #[\Override]
+    #[Override]
     public function getUserIdentifier(): string
     {
         return $this->userIdentifier;
@@ -49,13 +50,13 @@ final readonly class User implements UserInterface
     /**
      * @return array<string>
      */
-    #[\Override]
+    #[Override]
     public function getRoles(): array
     {
         return $this->roles;
     }
 
-    #[\Override]
+    #[Override]
     public function eraseCredentials(): void
     {
     }
