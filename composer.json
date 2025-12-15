@@ -87,7 +87,7 @@
     "phpstan": "phpstan analyse --memory-limit=-1",
     "format": "php-cs-fixer fix",
     "depcheck": "composer-unused",
-    "dev": "@php -S localhost:8000 -t public public/index.php"
+    "dev": "@php -S localhost:${SERVER_PORT:-3000} -t public public/router.php"
   },
   "config": {
     "platform": {

@@ -9,7 +9,7 @@ auth_signin:
 auth_signin_provider:
   path: /auth/signin/{provider}
   controller: App\Controller\AuthController::redirectToProvider
-  methods: [POST]
+  methods: [ POST ]
 
 auth_callback:
   path: /auth/callback
@@ -22,7 +22,7 @@ auth_error:
 auth_logout:
   path: /auth/logout
   controller: App\Controller\AuthController::logout
-  methods: [POST]
+  methods: [ POST ]
 
 auth_logout_callback:
   path: /auth/logout/callback
