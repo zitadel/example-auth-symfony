@@ -1,9 +1,12 @@
 <?php
+/** @noinspection PhpMultipleClassDeclarationsInspection */
+/** @noinspection PhpUnused */
 
 declare(strict_types=1);
 
 namespace App\Security;
 
+use Override;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,6 +17,7 @@ use Symfony\Component\Security\Http\Authenticator\AbstractAuthenticator;
 use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
 use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
 use Symfony\Component\Security\Http\Authenticator\Passport\SelfValidatingPassport;
+use Symfony\Component\Security\Http\EntryPoint\AuthenticationEntryPointInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 /**
@@ -32,7 +36,7 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
  * The authenticator automatically handles token refresh when access tokens expire,
  * maintaining long-lived sessions without requiring re-authentication.
  */
-final class ZitadelAuthenticator extends AbstractAuthenticator
+final class ZitadelAuthenticator extends AbstractAuthenticator implements AuthenticationEntryPointInterface
 {
     /**
      * @param HttpClientInterface $httpClient HTTP client for making OAuth API calls
@@ -50,7 +54,7 @@ final class ZitadelAuthenticator extends AbstractAuthenticator
     ) {
     }
 
-    #[\Override]
+    #[Override]
     public function supports(Request $request): ?bool
     {
         return $request->attributes->get('_route') === 'auth_callback';
@@ -74,7 +78,7 @@ final class ZitadelAuthenticator extends AbstractAuthenticator
      * @return Passport Security passport containing authenticated user credentials
      * @throws AuthenticationException If code exchange or userinfo fetch fails
      */
-    #[\Override]
+    #[Override]
     public function authenticate(Request $request): Passport
     {
         $code = $request->query->get('code');
@@ -156,7 +160,7 @@ final class ZitadelAuthenticator extends AbstractAuthenticator
      * @param string $firewallName The name of the firewall that authenticated the user
      * @return Response|null Redirect response to the target page
      */
-    #[\Override]
+    #[Override]
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
         $callbackUrl = $request->query->get('callbackUrl')
@@ -179,11 +183,17 @@ final class ZitadelAuthenticator extends AbstractAuthenticator
      * @param AuthenticationException $exception The exception that caused authentication to fail
      * @return Response|null Redirect response to the error page
      */
-    #[\Override]
+    #[Override]
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception): ?Response
     {
         return new RedirectResponse($this->router->generate('auth_error', [
             'error' => 'authentication_failed',
         ]));
+    }
+
+    #[Override]
+    public function start(Request $request, ?AuthenticationException $authException = null): Response
+    {
+        return new RedirectResponse($this->router->generate('auth_signin'));
     }
 }

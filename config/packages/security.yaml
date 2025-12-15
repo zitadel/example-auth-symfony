@@ -16,6 +16,7 @@ security:
       provider: app_user_provider
       custom_authenticators:
         - App\Security\ZitadelAuthenticator
+      entry_point: App\Security\ZitadelAuthenticator
 
   access_control:
     - { path: ^/profile, roles: ROLE_USER }
