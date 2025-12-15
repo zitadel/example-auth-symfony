@@ -1,0 +1,109 @@
+{
+  "name": "zitadel/laravel-pkce-example",
+  "type": "project",
+  "description": "Laravel application demonstrating ZITADEL authentication with PKCE using Socialite",
+  "keywords": [
+    "laravel",
+    "zitadel",
+    "authentication",
+    "oauth2",
+    "oidc",
+    "pkce",
+    "socialite",
+    "sso"
+  ],
+  "homepage": "https://github.com/zitadel/example-laravel-auth",
+  "license": "Apache-2.0",
+  "authors": [
+    {
+      "name": "Zitadel",
+      "homepage": "https://zitadel.com"
+    }
+  ],
+  "require": {
+    "php": "^8.3",
+    "ext-ctype": "*",
+    "ext-iconv": "*",
+    "symfony/asset": "7.4.*",
+    "symfony/console": "7.4.*",
+    "symfony/dotenv": "7.4.*",
+    "symfony/flex": "^2",
+    "symfony/framework-bundle": "7.4.*",
+    "symfony/http-client": "7.4.*",
+    "symfony/runtime": "7.4.*",
+    "symfony/security-bundle": "7.4.*",
+    "symfony/twig-bundle": "7.4.*",
+    "symfony/yaml": "7.4.*",
+    "twig/extra-bundle": "^2.12|^3.0",
+    "twig/twig": "^2.12|^3.0"
+  },
+  "require-dev": {
+    "friendsofphp/php-cs-fixer": "^3.64",
+    "icanhazstring/composer-unused": "^0.9.3",
+    "phpstan/phpstan": "^1.12",
+    "phpstan/phpstan-symfony": "^1.4",
+    "phpunit/phpunit": "^11.0",
+    "rector/rector": "^1.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "App\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "App\\Tests\\": "tests/"
+    }
+  },
+  "replace": {
+    "symfony/polyfill-ctype": "*",
+    "symfony/polyfill-iconv": "*",
+    "symfony/polyfill-php72": "*",
+    "symfony/polyfill-php73": "*",
+    "symfony/polyfill-php74": "*",
+    "symfony/polyfill-php80": "*",
+    "symfony/polyfill-php81": "*",
+    "symfony/polyfill-php82": "*"
+  },
+  "extra": {
+    "symfony": {
+      "allow-contrib": false,
+      "require": "7.4.*"
+    }
+  },
+  "scripts": {
+    "auto-scripts": {
+      "cache:clear": "symfony-cmd",
+      "assets:install %PUBLIC_DIR%": "symfony-cmd"
+    },
+    "post-install-cmd": [
+      "@auto-scripts"
+    ],
+    "post-update-cmd": [
+      "@auto-scripts"
+    ],
+    "test": "@php artisan test --coverage-html=build/coverage/html --coverage-clover=build/coverage/clover.xml --log-junit=build/reports/junit.xml",
+    "rector": "rector process",
+    "phpstan": "phpstan analyse --memory-limit=-1",
+    "format": "php-cs-fixer fix",
+    "depcheck": "composer-unused",
+    "dev": "@php -S localhost:8000 -t public public/index.php"
+  },
+  "config": {
+    "platform": {
+      "php": "8.3.0"
+    },
+    "allow-plugins": {
+      "php-http/discovery": true,
+      "symfony/flex": true,
+      "symfony/runtime": true
+    },
+    "bump-after-update": true,
+    "sort-packages": true
+  },
+  "conflict": {
+    "symfony/symfony": "*"
+  },
+  "minimum-stability": "stable",
+  "prefer-stable": true
+}

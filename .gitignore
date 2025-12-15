@@ -1,0 +1,45 @@
+.DS_Store
+.idea
+.vscode
+
+/vendor
+/node_modules
+/build
+
+/var
+
+.env
+.env.backup
+.env.phpunit
+
+composer.phar
+package.xml
+
+/public/build
+/public/hot
+/public/storage
+
+.php-cs-fixer.cache
+.phpunit.result.cache
+phpstan.result.cache
+
+_ide_helper.php
+_ide_helper_models.php
+.phpstorm.meta.php
+
+.devbox
+devbox.lock
+
+###> friendsofphp/php-cs-fixer ###
+/.php-cs-fixer.php
+/.php-cs-fixer.cache
+###< friendsofphp/php-cs-fixer ###
+
+###> phpunit/phpunit ###
+/phpunit.xml
+/.phpunit.cache/
+###< phpunit/phpunit ###
+
+###> phpstan/phpstan ###
+phpstan.neon
+###< phpstan/phpstan ###

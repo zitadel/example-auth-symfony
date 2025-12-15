@@ -1,0 +1,29 @@
+parameters:
+
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  App\:
+    resource: '../src/'
+    exclude:
+      - '../src/Kernel.php'
+
+  App\Security\ZitadelAuthenticator:
+    arguments:
+      $zitadelDomain: '%env(ZITADEL_DOMAIN)%'
+      $clientId: '%env(ZITADEL_CLIENT_ID)%'
+      $clientSecret: '%env(ZITADEL_CLIENT_SECRET)%'
+
+  App\Service\AuthService:
+    arguments:
+      $zitadelDomain: '%env(ZITADEL_DOMAIN)%'
+      $clientId: '%env(ZITADEL_CLIENT_ID)%'
+      $clientSecret: '%env(ZITADEL_CLIENT_SECRET)%'
+      $postLogoutUrl: '%env(ZITADEL_POST_LOGOUT_URL)%'
+
+  App\Controller\AuthController:
+    arguments:
+      $zitadelDomain: '%env(ZITADEL_DOMAIN)%'
+      $clientId: '%env(ZITADEL_CLIENT_ID)%'

@@ -1,0 +1,45 @@
+home:
+  path: /
+  controller: App\Controller\HomeController::index
+
+auth_signin:
+  path: /auth/signin
+  controller: App\Controller\AuthController::showSignin
+
+auth_signin_provider:
+  path: /auth/signin/{provider}
+  controller: App\Controller\AuthController::redirectToProvider
+  methods: [POST]
+
+auth_callback:
+  path: /auth/callback
+  controller: App\Controller\AuthController::handleProviderCallback
+
+auth_error:
+  path: /auth/error
+  controller: App\Controller\AuthController::showError
+
+auth_logout:
+  path: /auth/logout
+  controller: App\Controller\AuthController::logout
+  methods: [POST]
+
+auth_logout_callback:
+  path: /auth/logout/callback
+  controller: App\Controller\AuthController::logoutCallback
+
+auth_logout_success:
+  path: /auth/logout/success
+  controller: App\Controller\AuthController::logoutSuccess
+
+auth_logout_error:
+  path: /auth/logout/error
+  controller: App\Controller\AuthController::logoutError
+
+profile:
+  path: /profile
+  controller: App\Controller\ProfileController::show
+
+auth_userinfo:
+  path: /auth/userinfo
+  controller: App\Controller\AuthController::userInfo
