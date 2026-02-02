@@ -69,8 +69,7 @@ ZITADEL_CLIENT_ID="your-client-id"
 # does not strictly require a client secret for OIDC specification compliance,
 # Symfony Security will still require a value for its internal configuration.
 # Therefore, please provide a randomly generated string here.
-# You can generate a secure key using:
-# php -r "echo bin2hex(random_bytes(32));"
+# The client secret for your application, obtained from the ZITADEL Console.
 ZITADEL_CLIENT_SECRET="your-randomly-generated-client-secret"
 
 # URL where users are redirected after logout. This should match a Post Logout
