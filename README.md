@@ -92,7 +92,7 @@ cd example-auth-symfony
 composer install
 
 # 3. Start the development server
-composer run dev
+make start
 ```
 
 The application will now be running at `http://localhost:3000`.
