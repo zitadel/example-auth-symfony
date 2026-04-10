@@ -1,4 +1,5 @@
 parameters:
+  env(ZITADEL_POST_LOGIN_URL): '/profile'
 
 services:
   _defaults:
@@ -15,6 +16,7 @@ services:
       $zitadelDomain: '%env(ZITADEL_DOMAIN)%'
       $clientId: '%env(ZITADEL_CLIENT_ID)%'
       $clientSecret: '%env(ZITADEL_CLIENT_SECRET)%'
+      $postLoginUrl: '%env(ZITADEL_POST_LOGIN_URL)%'
 
   App\Service\AuthService:
     arguments:

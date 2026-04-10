@@ -58,6 +58,7 @@ final class ZitadelAuthenticator extends AbstractAuthenticator implements Authen
         private readonly string $zitadelDomain,
         private readonly string $clientId,
         private readonly string $clientSecret,
+        private readonly string $postLoginUrl,
     ) {
     }
 
@@ -181,7 +182,7 @@ final class ZitadelAuthenticator extends AbstractAuthenticator implements Authen
             return new RedirectResponse($callbackUrl);
         }
 
-        return new RedirectResponse($this->router->generate('profile'));
+        return new RedirectResponse($this->postLoginUrl);
     }
 
     /**
