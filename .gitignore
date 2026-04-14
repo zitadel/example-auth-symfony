@@ -28,7 +28,6 @@ _ide_helper_models.php
 .phpstorm.meta.php
 
 .devbox
-devbox.lock
 
 /.php-cs-fixer.cache
 
