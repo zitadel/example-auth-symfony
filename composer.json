@@ -1,18 +1,17 @@
 {
-  "name": "zitadel/laravel-pkce-example",
+  "name": "zitadel/example-symfony-auth",
   "type": "project",
-  "description": "Laravel application demonstrating ZITADEL authentication with PKCE using Socialite",
+  "description": "Symfony application demonstrating ZITADEL authentication with PKCE",
   "keywords": [
-    "laravel",
+    "symfony",
     "zitadel",
     "authentication",
     "oauth2",
     "oidc",
     "pkce",
-    "socialite",
     "sso"
   ],
-  "homepage": "https://github.com/zitadel/example-laravel-auth",
+  "homepage": "https://github.com/zitadel/example-auth-symfony",
   "license": "Apache-2.0",
   "authors": [
     {
