@@ -29,6 +29,4 @@ _ide_helper_models.php
 
 .devbox
 
-/.php-cs-fixer.cache
-
 /.phpunit.cache/
