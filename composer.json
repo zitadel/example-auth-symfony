@@ -1,5 +1,5 @@
 {
-  "name": "zitadel/example-symfony-auth",
+  "name": "zitadel/example-auth-symfony",
   "type": "project",
   "description": "Symfony application demonstrating ZITADEL authentication with PKCE",
   "keywords": [
